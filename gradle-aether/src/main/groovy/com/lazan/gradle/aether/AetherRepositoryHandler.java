@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gradle.api.Action;
-import org.gradle.api.Project;
+import org.gradle.util.ConfigureUtil;
+
+import groovy.lang.Closure;
 
 public class AetherRepositoryHandler {
-	private final Project project;
 	private List<AetherRepository> repositories = new ArrayList<>();
 
-	public AetherRepositoryHandler(Project project) {
-		super();
-		this.project = project;
-	}
-	
 	public void repository(Action<AetherRepository> action) {
 		AetherRepository repository = new AetherRepository();
 		repositories.add(repository);
 		action.execute(repository);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public void repository(Closure closure) {
+		repository(ConfigureUtil.configureUsing(closure));
 	}
 	
 	public void mavenCentral() {

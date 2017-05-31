@@ -10,7 +10,21 @@ buildscript {
 	}
 }
 
+repositories {
+	mavenCentral()
+	maven {
+		url 'http://repository.jboss.org/nexus/content/groups/public/'
+	}
+}
 
-
-apply plugin: 'base'
+apply plugin: 'java'
 apply plugin: com.lazan.gradle.aether.GradleAetherPlugin
+
+aether {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		add('compile', 'org.wildfly.swarm:undertow:2017.5.0')
+	}
+}
