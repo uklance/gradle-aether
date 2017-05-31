@@ -1,0 +1,16 @@
+group = 'com.lazan'
+version = file('../version.txt').text.trim()
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "com.lazan:gradle-aether:1.0-SNAPSHOT"
+	}
+}
+
+
+
+apply plugin: 'base'
+apply plugin: com.lazan.gradle.aether.GradleAetherPlugin

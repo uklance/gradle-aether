@@ -1,0 +1,20 @@
+group = 'com.lazan'
+version = file('../version.txt').text.trim()
+
+apply plugin: 'groovy'
+
+ext {
+	aetherVersion = '1.1.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile gradleApi()
+	compile 'org.apache.maven:maven-aether-provider:3.3.9'
+	compile "org.eclipse.aether:aether-connector-basic:${aetherVersion}"
+	compile "org.eclipse.aether:aether-transport-http:${aetherVersion}"
+	compile "org.eclipse.aether:aether-transport-file:${aetherVersion}"
+}
