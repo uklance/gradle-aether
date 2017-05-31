@@ -29,7 +29,7 @@ import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ModuleDependency;
 
-public class AetherDependencyHandler {
+class AetherDependencyHandler {
 	private final Project project;
 	private final AetherRepositoryHandler repositoryHandler;
 	
@@ -37,6 +37,10 @@ public class AetherDependencyHandler {
 		super();
 		this.project = project;
 		this.repositoryHandler = repositoryHandler;
+	}
+	
+	def methodMissing(String name, args) {
+		add(name, (String) args[0]);
 	}
 	
 	public void add(Configuration configuration, String notation) {
@@ -50,8 +54,7 @@ public class AetherDependencyHandler {
 	
 			List<RemoteRepository> repositories = new ArrayList<>();
 			for (AetherRepository repository : repositoryHandler.getRepositories()) {
-				RemoteRepository remoteRepository 
-					= new RemoteRepository.Builder(repository.getId(), repository.getType(), repository.getUrl()).build();
+				RemoteRepository remoteRepository = new RemoteRepository.Builder(repository.getId(), repository.getType(), repository.getUrl()).build();
 				repositories.add(remoteRepository);
 			}
 				
